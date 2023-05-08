@@ -140,8 +140,8 @@ public class IMS extends javax.swing.JFrame {
     private void stocksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stocksActionPerformed
         // TODO add your handling code here:
         dispose();
-        editItem additem = new editItem();
-        additem.setVisible(true);
+        stocks edititem = new stocks();
+        edititem.setVisible(true);
     }//GEN-LAST:event_stocksActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed

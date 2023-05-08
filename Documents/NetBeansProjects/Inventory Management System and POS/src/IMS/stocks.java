@@ -8,12 +8,12 @@ package IMS;
  *
  * @author Ryan
  */
-public class editItem extends javax.swing.JFrame {
+public class stocks extends javax.swing.JFrame {
 
     /**
      * Creates new form ADDITEM
      */
-    public editItem() {
+    public stocks() {
         initComponents();
     }
 
@@ -255,7 +255,7 @@ public class editItem extends javax.swing.JFrame {
     private void editItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editItemActionPerformed
         // TODO add your handling code here:
         dispose();
-        editItem additem = new editItem();
+        stocks additem = new stocks();
         additem.setVisible(true);
     }//GEN-LAST:event_editItemActionPerformed
 
@@ -268,7 +268,7 @@ public class editItem extends javax.swing.JFrame {
     private void editItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editItem1ActionPerformed
         // TODO add your handling code here:
         dispose();
-        editItem additem = new editItem();
+        stocks additem = new stocks();
         additem.setVisible(true);
     }//GEN-LAST:event_editItem1ActionPerformed
 
@@ -303,14 +303,18 @@ public class editItem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(editItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stocks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(editItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stocks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(editItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stocks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(editItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stocks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -319,7 +323,7 @@ public class editItem extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new editItem().setVisible(true);
+                new stocks().setVisible(true);
             }
         });
     }
