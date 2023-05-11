@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="570" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="574" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -47,45 +47,32 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" max="32767" attributes="0"/>
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="stocks" max="32767" attributes="0"/>
-                              <Component id="logout" max="32767" attributes="0"/>
-                              <Component id="reportLog" alignment="0" pref="106" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="311" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="stocksButton" max="32767" attributes="0"/>
+                          <Component id="logoutButton" max="32767" attributes="0"/>
+                          <Component id="reportLogButton" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="backup" min="-2" pref="106" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="backupButton" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" pref="53" max="-2" attributes="0"/>
-                          <EmptySpace pref="97" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
+                  <Component id="stocksButton" min="-2" pref="98" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="stocks" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="reportLogButton" min="-2" pref="98" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="reportLog" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="backupButton" min="-2" pref="104" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="backup" min="-2" pref="104" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="logout" min="-2" pref="96" max="-2" attributes="0"/>
+                  <Component id="logoutButton" min="-2" pref="96" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -104,7 +91,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" pref="696" max="-2" attributes="0"/>
+                      <Component id="IMSTitle" min="-2" pref="696" max="-2" attributes="0"/>
                       <EmptySpace pref="65" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -113,14 +100,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="50" max="32767" attributes="0"/>
-                      <Component id="jLabel4" min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="IMSTitle" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="IMSTitle">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="32" style="1"/>
@@ -130,42 +117,31 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="logout">
+        <Component class="javax.swing.JButton" name="logoutButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="LOGOUT"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="reportLog">
+        <Component class="javax.swing.JButton" name="reportLogButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="REPORT/LOG"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="backup">
+        <Component class="javax.swing.JButton" name="backupButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="BACKUP"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="stocks">
+        <Component class="javax.swing.JButton" name="stocksButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="STOCKS"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stocksActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stocksButtonActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="32" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="ff" red="33" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="WELCOME ADMIN"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
