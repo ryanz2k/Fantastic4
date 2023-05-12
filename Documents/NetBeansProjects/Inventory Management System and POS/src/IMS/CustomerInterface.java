@@ -183,8 +183,8 @@ public class CustomerInterface extends javax.swing.JFrame {
         }
         else{
             dispose();
-            PosLogin logindisplay = new PosLogin();
-            logindisplay.setVisible(true);
+           /* PosLogin logindisplay = new PosLogin();
+            logindisplay.setVisible(true);*/ 
         }
     }//GEN-LAST:event_ConfirmRegisterActionPerformed
 
