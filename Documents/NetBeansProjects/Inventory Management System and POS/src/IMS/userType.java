@@ -139,7 +139,13 @@ public class userType extends javax.swing.JFrame {
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
-        // TODO add your handling code here:
+   
+       POSLogin POSLoginFrame = new  POSLogin();
+       POSLoginFrame.setVisible(true);
+       POSLoginFrame.pack();
+       POSLoginFrame.setLocationRelativeTo(null); 
+       this.dispose();
+       
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void customerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerButtonActionPerformed
