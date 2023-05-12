@@ -3,11 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package IMS;
+
+
+import javax.swing.*;
+import javax.swing.border.Border;
 /**
  *
  * @author Raidi
  */
-public class CustomerInterface extends javax.swing.JPanel {
+public class CustomerInterface extends javax.swing.JFrame {
 
     /**
      * Creates new form CustomerInterface
@@ -32,21 +36,17 @@ public class CustomerInterface extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        CustomerUsernameRegister = new javax.swing.JTextField();
-        CustomerPasswordRegister = new javax.swing.JTextField();
-        CustomerEmailRegister = new javax.swing.JTextField();
-        CustomerBirthdayDayRegister = new javax.swing.JTextField();
-        CustomerBirthdayMonhtRegister = new javax.swing.JTextField();
-        CustomerBirthdayYearRegister = new javax.swing.JTextField();
         ConfirmRegister = new javax.swing.JButton();
+        usernameregister = new javax.swing.JTextField();
+        passwordregister = new javax.swing.JTextField();
+        emailregister = new javax.swing.JTextField();
+        birthdayregister = new javax.swing.JTextField();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("jLabel2");
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        setAlignmentX(0.0F);
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 0));
         jPanel1.setAlignmentX(0.0F);
@@ -103,57 +103,6 @@ public class CustomerInterface extends javax.swing.JPanel {
         jLabel6.setMaximumSize(new java.awt.Dimension(69, 22));
         jLabel6.setMinimumSize(new java.awt.Dimension(69, 22));
 
-        CustomerUsernameRegister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CustomerUsernameRegister.setText("Enter Username");
-        CustomerUsernameRegister.setAlignmentX(0.0F);
-        CustomerUsernameRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        CustomerUsernameRegister.setPreferredSize(new java.awt.Dimension(42, 42));
-
-        CustomerPasswordRegister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CustomerPasswordRegister.setText("*********");
-        CustomerPasswordRegister.setAlignmentX(0.0F);
-        CustomerPasswordRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        CustomerPasswordRegister.setPreferredSize(new java.awt.Dimension(42, 42));
-
-        CustomerEmailRegister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CustomerEmailRegister.setText("imadrunkard123@email.com");
-        CustomerEmailRegister.setAlignmentX(0.0F);
-        CustomerEmailRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        CustomerEmailRegister.setPreferredSize(new java.awt.Dimension(42, 42));
-
-        CustomerBirthdayDayRegister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CustomerBirthdayDayRegister.setText("Day");
-        CustomerBirthdayDayRegister.setAlignmentX(0.0F);
-        CustomerBirthdayDayRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        CustomerBirthdayDayRegister.setPreferredSize(new java.awt.Dimension(42, 42));
-        CustomerBirthdayDayRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CustomerBirthdayDayRegisterActionPerformed(evt);
-            }
-        });
-
-        CustomerBirthdayMonhtRegister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CustomerBirthdayMonhtRegister.setText("Month");
-        CustomerBirthdayMonhtRegister.setAlignmentX(0.0F);
-        CustomerBirthdayMonhtRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        CustomerBirthdayMonhtRegister.setPreferredSize(new java.awt.Dimension(42, 42));
-        CustomerBirthdayMonhtRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CustomerBirthdayMonhtRegisterActionPerformed(evt);
-            }
-        });
-
-        CustomerBirthdayYearRegister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CustomerBirthdayYearRegister.setText("Year");
-        CustomerBirthdayYearRegister.setAlignmentX(0.0F);
-        CustomerBirthdayYearRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        CustomerBirthdayYearRegister.setPreferredSize(new java.awt.Dimension(42, 42));
-        CustomerBirthdayYearRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CustomerBirthdayYearRegisterActionPerformed(evt);
-            }
-        });
-
         ConfirmRegister.setText("Confirm");
         ConfirmRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,100 +110,105 @@ public class CustomerInterface extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        usernameregister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        usernameregister.setText("imadrunkard");
+
+        passwordregister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        passwordregister.setText("********");
+
+        emailregister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        emailregister.setText("bringmebeer@email.com");
+
+        birthdayregister.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        birthdayregister.setText("11/9/2001");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(293, 293, 293)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ConfirmRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CustomerUsernameRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CustomerPasswordRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CustomerEmailRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CustomerBirthdayDayRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CustomerBirthdayMonhtRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CustomerBirthdayYearRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(320, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ConfirmRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(373, 373, 373))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameregister)
+                            .addComponent(passwordregister)
+                            .addComponent(emailregister, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                            .addComponent(birthdayregister))))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerUsernameRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(usernameregister))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerPasswordRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(passwordregister))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerEmailRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(emailregister))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerBirthdayMonhtRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerBirthdayYearRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerBirthdayDayRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(birthdayregister))
+                .addGap(31, 31, 31)
                 .addComponent(ConfirmRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 105, Short.MAX_VALUE))
+                .addGap(0, 110, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CustomerBirthdayMonhtRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerBirthdayMonhtRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CustomerBirthdayMonhtRegisterActionPerformed
-
-    private void CustomerBirthdayDayRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerBirthdayDayRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CustomerBirthdayDayRegisterActionPerformed
-
-    private void CustomerBirthdayYearRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerBirthdayYearRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CustomerBirthdayYearRegisterActionPerformed
-
     private void ConfirmRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmRegisterActionPerformed
-        // User Confirmed his/her Registration
-        
+        // User inputs Personal Details
+        String UsernameReg = usernameregister.getText();
+        String PasswordReg = passwordregister.getText();
+        String EmailReg = emailregister.getText();
+        String BirthdayReg = birthdayregister.getText();
+
+        if(UsernameReg.isEmpty() || PasswordReg.isEmpty() || EmailReg.isEmpty() || BirthdayReg.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Please Fill Proper Details","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            dispose();
+            PosLogin logindisplay = new PosLogin();
+            logindisplay.setVisible(true);
+        }
     }//GEN-LAST:event_ConfirmRegisterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConfirmRegister;
-    private javax.swing.JTextField CustomerBirthdayDayRegister;
-    private javax.swing.JTextField CustomerBirthdayMonhtRegister;
-    private javax.swing.JTextField CustomerBirthdayYearRegister;
-    private javax.swing.JTextField CustomerEmailRegister;
-    private javax.swing.JTextField CustomerPasswordRegister;
     private javax.swing.JLabel CustomerRegisterForm;
-    private javax.swing.JTextField CustomerUsernameRegister;
+    private javax.swing.JTextField birthdayregister;
+    private javax.swing.JTextField emailregister;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField passwordregister;
+    private javax.swing.JTextField usernameregister;
     // End of variables declaration//GEN-END:variables
+
+    private void setBorder(Border createLineBorder) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void setAlignmentX(float f) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
