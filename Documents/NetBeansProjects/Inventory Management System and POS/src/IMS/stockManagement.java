@@ -78,6 +78,7 @@ public class stockManagement extends javax.swing.JFrame {
         jButton2.setText("ADD ITEM");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stock Management");
         setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
@@ -203,7 +204,7 @@ public class stockManagement extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(40, 260, 720, 160);
+        jPanel2.setBounds(40, 280, 720, 160);
 
         itemList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -235,7 +236,7 @@ public class stockManagement extends javax.swing.JFrame {
         }
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(40, 60, 720, 180);
+        jScrollPane1.setBounds(40, 50, 720, 210);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
