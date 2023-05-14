@@ -4,22 +4,17 @@
  */
 package IMS;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Raidi
  */
-public class CustomerLoginfromRegister extends javax.swing.JFrame {
-
-    private Object Usernamereg;
-    private Object PasswordReg;
-    
+public class CustomerLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form CusomerLoginfromRegiser
      */
-    public CustomerLoginfromRegister() {
+    public CustomerLogin() {
         initComponents();
     }
 
@@ -39,6 +34,7 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
         customersernamelogin = new javax.swing.JTextField();
         costumerpasswordlogin = new javax.swing.JTextField();
         costumerconfirmlogin = new javax.swing.JButton();
+        customeregistering = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(925, 570));
@@ -59,15 +55,20 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         customersernamelogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customersernamelogin.setText("jTextField1");
 
         costumerpasswordlogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        costumerpasswordlogin.setText("jTextField1");
 
         costumerconfirmlogin.setText("Login");
         costumerconfirmlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 costumerconfirmloginActionPerformed(evt);
+            }
+        });
+
+        customeregistering.setText("Register");
+        customeregistering.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customeregisteringActionPerformed(evt);
             }
         });
 
@@ -82,7 +83,7 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
                         .addComponent(CustomerLoginRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(130, 130, 130)
                         .addComponent(jLabel2)
-                        .addContainerGap(262, Short.MAX_VALUE))
+                        .addContainerGap(177, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,7 +95,10 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(customersernamelogin, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(costumerpasswordlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(costumerconfirmlogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(customeregistering, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(costumerconfirmlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(214, 214, 214))))
         );
         layout.setVerticalGroup(
@@ -113,15 +117,18 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(costumerpasswordlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(costumerconfirmlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(costumerconfirmlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customeregistering, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void costumerconfirmloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costumerconfirmloginActionPerformed
-        CustomerInterface customerdetails = new CustomerInterface();
+        // Entered / Stored Customer Details
+        // CustomerRegister customerreg = new CustomerRegister();
         
         // Costumer confirms to login
         String usernamelog = customersernamelogin.getText();
@@ -131,11 +138,23 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
             // Ensure user filled the text
             JOptionPane.showMessageDialog(this,"Check if you have filled all","Error",JOptionPane.ERROR_MESSAGE);
         }
-        else if(usernamelog.equals(Usernamereg) && passwordlog.equals(PasswordReg)){
+        else if(usernamelog.equals("drunkard") && passwordlog.equals("456")){ // That is a place holder for now
             // Entered details are not the same
-            JOptionPane.showMessageDialog(this,"Wrong Username or Password!","Error",JOptionPane.ERROR_MESSAGE);
+            dispose();
+            CustomerProfile seeprofile = new CustomerProfile();
+            seeprofile.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Incorrect Username and Password!","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_costumerconfirmloginActionPerformed
+
+    private void customeregisteringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customeregisteringActionPerformed
+        // Goes to the Register Form for Customers
+        dispose();
+        CustomerRegister customerreg = new CustomerRegister();
+        customerreg.setVisible(true);
+    }//GEN-LAST:event_customeregisteringActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,21 +173,23 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerLoginfromRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerLoginfromRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerLoginfromRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerLoginfromRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerLoginfromRegister().setVisible(true);
+                new CustomerLogin().setVisible(true);
             }
         });
     }
@@ -177,6 +198,7 @@ public class CustomerLoginfromRegister extends javax.swing.JFrame {
     private javax.swing.JLabel CustomerLoginRegister;
     private javax.swing.JButton costumerconfirmlogin;
     private javax.swing.JTextField costumerpasswordlogin;
+    private javax.swing.JButton customeregistering;
     private javax.swing.JTextField customersernamelogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

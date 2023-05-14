@@ -39,8 +39,6 @@ public class POSLogin extends javax.swing.JFrame {
         Left.setMinimumSize(new java.awt.Dimension(400, 500));
         Left.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Personal\\OneDrive\\Documents\\Fantastic4\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\Icon\\FantasticFourLogo.png")); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Gadugi", 3, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("WELCOME TO POS SYSTEM");

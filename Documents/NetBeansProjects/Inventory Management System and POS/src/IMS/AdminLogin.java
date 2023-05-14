@@ -65,8 +65,6 @@ public class AdminLogin extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Personal\\OneDrive\\Documents\\Fantastic4\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\Icon\\FantasticFourLogo.png")); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("Gadugi", 3, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("WELCOME TO INVENTORY MANAGEMENT");
@@ -136,7 +134,7 @@ public class AdminLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Username");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(440, 140, 100, 16);
+        jLabel3.setBounds(440, 140, 100, 15);
 
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Password");
