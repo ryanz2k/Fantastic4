@@ -14,9 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class stockManagement extends javax.swing.JFrame {
     DefaultTableModel model;
     
-    
-
-    /**
+   /**
      * Creates new form ADDITEM
      */
     public stockManagement() {
@@ -46,16 +44,17 @@ public class stockManagement extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
-        nameText = new javax.swing.JTextField();
         descripLabel = new javax.swing.JLabel();
         priceText = new javax.swing.JTextField();
         descripText = new javax.swing.JTextField();
         quantityLabel = new javax.swing.JLabel();
         priceLabel = new javax.swing.JLabel();
         quantityText = new javax.swing.JTextField();
+        productList = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemList = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         editItem.setText("STOCKS");
         editItem.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +78,6 @@ public class stockManagement extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stock Management");
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -131,17 +129,28 @@ public class stockManagement extends javax.swing.JFrame {
         descripLabel.setForeground(new java.awt.Color(51, 51, 51));
         descripLabel.setText("Description");
 
+        priceText.setEditable(false);
+
+        descripText.setEditable(false);
+
         quantityLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         quantityLabel.setForeground(new java.awt.Color(51, 51, 51));
         quantityLabel.setText("Quantity");
 
         priceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priceLabel.setForeground(new java.awt.Color(51, 51, 51));
-        priceLabel.setText("Price");
+        priceLabel.setText("Price ($)");
 
         quantityText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quantityTextActionPerformed(evt);
+            }
+        });
+
+        productList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Product", "Chardonnay Wine", "Cabernet Sauvignon Wine", "Stout Beer", "Schwarzbier", "Scotch Whisky", "Bourbon Whisky", "Plymouth Gin", "Old Tom Gin", "Sweet Cider", "Bitter Cider", "Fruit Vodka", "Plain Vodka", "Distilled Soju", "Navy Rum", "Rhum Agricole" }));
+        productList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productListActionPerformed(evt);
             }
         });
 
@@ -156,19 +165,18 @@ public class stockManagement extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(quantityLabel)
                             .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nameText, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                            .addComponent(descripText))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(productList, 0, 249, Short.MAX_VALUE)
+                            .addComponent(quantityText))
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(descripLabel)
                             .addComponent(priceLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(priceText, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                            .addComponent(quantityText))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(descripText, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                            .addComponent(priceText)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
@@ -176,13 +184,13 @@ public class stockManagement extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(28, Short.MAX_VALUE))))
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -191,16 +199,17 @@ public class stockManagement extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
-                    .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descripLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(productList)
+                    .addComponent(descripText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantityLabel)
-                    .addComponent(descripText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quantityText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(quantityLabel)
+                        .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quantityText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
 
         jPanel1.add(jPanel2);
@@ -244,13 +253,17 @@ public class stockManagement extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(260, 10, 269, 32);
 
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(380, 140, 75, 23);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,12 +288,12 @@ public class stockManagement extends javax.swing.JFrame {
 
     private void itemListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemListMouseClicked
         // TODO add your handling code here:\
-        String tblProduct = itemList.getValueAt(itemList.getSelectedRow(), 0).toString();
+        String selectedItem = itemList.getValueAt(itemList.getSelectedRow(), 0).toString();
         String tblDescription = itemList.getValueAt(itemList.getSelectedRow(), 1).toString();
         String tblQuantity = itemList.getValueAt(itemList.getSelectedRow(), 2).toString();
         String tblPrice = itemList.getValueAt(itemList.getSelectedRow(), 3).toString();
         
-        nameText.setText(tblProduct);
+
         descripText.setText(tblDescription);
         quantityText.setText(tblQuantity);
         priceText.setText(tblPrice);
@@ -292,12 +305,12 @@ public class stockManagement extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // Validate if empty
-        if (nameText.getText().equals("")||descripText.getText().equals("")||quantityText.getText().equals("")||priceText.getText().equals("")){
+        
+        if (descripText.getText().equals("")||quantityText.getText().equals("")||priceText.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Please Fill in The Blanks","Error",JOptionPane.ERROR_MESSAGE);
         }
         else{
-            model.insertRow(model.getRowCount(),new Object[] {nameText.getText(),descripText.getText(),quantityText.getText(),priceText.getText()});
-            nameText.setText("");
+            model.insertRow(model.getRowCount(),new Object[] {productList.getSelectedItem().toString(),descripText.getText(),quantityText.getText(),priceText.getText()});
             descripText.setText("");
             quantityText.setText("");
             priceText.setText("");
@@ -308,17 +321,15 @@ public class stockManagement extends javax.swing.JFrame {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         if (itemList.getSelectedRowCount()==1){
-            String product = nameText.getText();
             String description = descripText.getText();
             String quantity = quantityText.getText();
             String price = priceText.getText();
 
-            itemList.setValueAt(product, itemList.getSelectedRow(), 0);
+
             itemList.setValueAt(description, itemList.getSelectedRow(), 1);
             itemList.setValueAt(quantity, itemList.getSelectedRow(), 2);
             itemList.setValueAt(price, itemList.getSelectedRow(), 3);
             JOptionPane.showMessageDialog(this, "Product successfuly updated");
-            nameText.setText("");
             descripText.setText("");
             quantityText.setText("");
             priceText.setText("");
@@ -357,6 +368,73 @@ public class stockManagement extends javax.swing.JFrame {
         IMS ims = new IMS();
         ims.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void productListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productListActionPerformed
+        // TODO add your handling code here:
+        String selectedItem = productList.getSelectedItem().toString();
+        switch (selectedItem){
+            case "Chardonnay Wine":
+                descripText.setText("Popular dry white wine");
+                priceText.setText("$25");
+                break;
+            case "Cabernet Sauvignon Wine":
+                descripText.setText("Bold, full-bodied red wine");
+                priceText.setText("$15");
+                break;
+            case "Stout Beer":
+                descripText.setText("Dark, roasted, malty beer");
+                priceText.setText("$8");
+                break;
+            case "Schwarzbier":
+                descripText.setText("German-style black lager");
+                priceText.setText("$10");
+                break;
+            case "Scotch Whisky":
+                descripText.setText("Smoky, peaty Scottish whisky");
+                priceText.setText("$30");
+                break;
+            case "Bourbon Whisky":
+                descripText.setText("American oak-aged whisky");
+                priceText.setText("$20");
+                break;
+            case "Plymouth Gin":
+                descripText.setText("Classic, citrusy British gin");
+                priceText.setText("$20");
+                break;
+            case "Old Tom Gin":
+                descripText.setText("Slightly sweetened gin variety");
+                priceText.setText("$25");
+                break;
+            case "Sweet Cider":
+                descripText.setText("Apple juice with alcohol");
+                priceText.setText("$8");
+                break;
+            case "Bitter Cider":
+                descripText.setText("Dry, tart apple cider");
+                priceText.setText("$8");
+                break;
+            case "Fruit Vodka":
+                descripText.setText("Vodka with fruit flavoring");
+                priceText.setText("$15");
+                break;
+            case "Plain Vodka":
+                descripText.setText("Neutral, clear spirit");
+                priceText.setText("$10");
+                break;
+            case "Distilled Soju":
+                descripText.setText("Clear Korean liquor");
+                priceText.setText("$15");
+                break;
+            case "Navy Rum":
+                descripText.setText("High-proof, spiced rum");
+                priceText.setText("$15");
+                break;
+            case "Rhum Agricole":
+                descripText.setText("French Caribbean rum variety");
+                priceText.setText("$30");
+                break;      
+        }
+    }//GEN-LAST:event_productListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -407,7 +485,6 @@ public class stockManagement extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
@@ -416,6 +493,7 @@ public class stockManagement extends javax.swing.JFrame {
     private javax.swing.JTextField descripText;
     private javax.swing.JButton editItem;
     private javax.swing.JTable itemList;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -423,9 +501,9 @@ public class stockManagement extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logout;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JTextField nameText;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JTextField priceText;
+    private javax.swing.JComboBox<String> productList;
     private javax.swing.JLabel quantityLabel;
     private javax.swing.JTextField quantityText;
     private javax.swing.JButton reportLog;
