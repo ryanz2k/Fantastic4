@@ -27,7 +27,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        customersernamelogin = new javax.swing.JTextField();
+        customerusernamelogin = new javax.swing.JTextField();
         costumerconfirmlogin = new javax.swing.JButton();
         customeregistering = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -48,15 +48,15 @@ public class CustomerLogin extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        customersernamelogin.setForeground(new java.awt.Color(102, 102, 102));
-        customersernamelogin.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        customersernamelogin.addActionListener(new java.awt.event.ActionListener() {
+        customerusernamelogin.setForeground(new java.awt.Color(102, 102, 102));
+        customerusernamelogin.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        customerusernamelogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customersernameloginActionPerformed(evt);
+                customerusernameloginActionPerformed(evt);
             }
         });
-        getContentPane().add(customersernamelogin);
-        customersernamelogin.setBounds(430, 150, 320, 40);
+        getContentPane().add(customerusernamelogin);
+        customerusernamelogin.setBounds(430, 150, 320, 40);
 
         costumerconfirmlogin.setBackground(new java.awt.Color(102, 102, 102));
         costumerconfirmlogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,7 +185,7 @@ public class CustomerLogin extends javax.swing.JFrame {
         // CustomerRegister customerreg = new CustomerRegister();
         
         // Costumer confirms to login
-        String usernamelog = customersernamelogin.getText();
+        String usernamelog = customerusernamelogin.getText();
         String passwordlog = customerspasswordlogin.getText();
         
         if(usernamelog.isEmpty() || passwordlog.isEmpty()){
@@ -210,9 +210,9 @@ public class CustomerLogin extends javax.swing.JFrame {
         customerreg.setVisible(true);
     }//GEN-LAST:event_customeregisteringActionPerformed
 
-    private void customersernameloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersernameloginActionPerformed
+    private void customerusernameloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerusernameloginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customersernameloginActionPerformed
+    }//GEN-LAST:event_customerusernameloginActionPerformed
 
     private void customerspasswordloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerspasswordloginActionPerformed
         // TODO add your handling code here:
@@ -231,46 +231,13 @@ public class CustomerLogin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomerLogin().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton costumerconfirmlogin;
     private javax.swing.JButton customeregistering;
-    private javax.swing.JTextField customersernamelogin;
     private javax.swing.JPasswordField customerspasswordlogin;
+    private javax.swing.JTextField customerusernamelogin;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
