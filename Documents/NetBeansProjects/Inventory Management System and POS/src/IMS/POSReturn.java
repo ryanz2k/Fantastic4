@@ -131,8 +131,6 @@ public class POSReturn extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(600, 200, 160, 299);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Personal\\OneDrive\\Documents\\Fantastic4\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\Icon\\FantasticFourLogo.png")); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(580, 10, 190, 180);
 

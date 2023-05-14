@@ -149,7 +149,10 @@ public class userType extends javax.swing.JFrame {
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void customerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerButtonActionPerformed
-        // TODO add your handling code here:
+        // On click goes to Customer Login
+        dispose();
+        CustomerLogin customerlog = new CustomerLogin();
+        customerlog.setVisible(true);
     }//GEN-LAST:event_customerButtonActionPerformed
 
     /**
