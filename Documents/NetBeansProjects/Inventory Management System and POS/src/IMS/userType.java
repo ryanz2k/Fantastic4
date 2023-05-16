@@ -136,9 +136,12 @@ public class userType extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
-        dispose();
+  
         AdminLogin admin = new AdminLogin();
         admin.setVisible(true);
+        admin.pack();
+        admin.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
@@ -153,9 +156,13 @@ public class userType extends javax.swing.JFrame {
 
     private void customerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerButtonActionPerformed
         // On click goes to Customer Login
-        dispose();
+        
         CustomerLogin customerlog = new CustomerLogin();
         customerlog.setVisible(true);
+        customerlog.pack();
+        customerlog.setLocationRelativeTo(null);
+        this.dispose();
+        
     }//GEN-LAST:event_customerButtonActionPerformed
 
     /**
@@ -188,7 +195,9 @@ public class userType extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+             
                 new userType().setVisible(true);
+                
             }
         });
     }
