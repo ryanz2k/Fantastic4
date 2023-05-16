@@ -58,9 +58,9 @@ public class CustomerOrder extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customercart = new javax.swing.JTable();
+        deleteitem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(740, 700));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -267,6 +267,13 @@ public class CustomerOrder extends javax.swing.JFrame {
             customercart.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        deleteitem.setText("Delete Item");
+        deleteitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteitemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,10 +285,6 @@ public class CustomerOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(calculatetotalprice)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(addtocart))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,7 +295,13 @@ public class CustomerOrder extends javax.swing.JFrame {
                                     .addComponent(productname, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                                     .addComponent(productquantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(productprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(producttotalprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(producttotalprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(calculatetotalprice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(deleteitem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(addtocart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -368,7 +377,7 @@ public class CustomerOrder extends javax.swing.JFrame {
                         .addComponent(plymouthgin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(plainvodka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -394,8 +403,9 @@ public class CustomerOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(calculatetotalprice)
                             .addComponent(addtocart))
-                        .addGap(75, 75, 75)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteitem)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(backtoprofile)
                 .addGap(44, 44, 44))
         );
@@ -546,6 +556,23 @@ public class CustomerOrder extends javax.swing.JFrame {
         productprice.setText("42");
     }//GEN-LAST:event_rhumagricoleActionPerformed
 
+    private void deleteitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteitemActionPerformed
+        // deletes selected item/s
+        DefaultTableModel cartlist = (DefaultTableModel)customercart.getModel();
+        
+        if(customercart.getSelectedRowCount() == 1){
+            cartlist.removeRow(customercart.getSelectedRow());
+        }
+        else{
+            if(customercart.getRowCount() == 0){
+                JOptionPane.showMessageDialog(this, "There is no Items!");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select the Item you want to Delete");
+            }
+        }
+    }//GEN-LAST:event_deleteitemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -590,6 +617,7 @@ public class CustomerOrder extends javax.swing.JFrame {
     private javax.swing.JButton calculatetotalprice;
     private javax.swing.JButton chardonnaywine;
     private javax.swing.JTable customercart;
+    private javax.swing.JButton deleteitem;
     private javax.swing.JButton distilledsoju;
     private javax.swing.JButton fruitvodka;
     private javax.swing.JLabel jLabel1;
