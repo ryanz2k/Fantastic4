@@ -209,7 +209,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     private void customeregisteringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customeregisteringActionPerformed
         // Goes to the Register Form for Customers
         dispose();
-        CustomerRegisterOldShit customerreg = new CustomerRegisterOldShit();
+        CustomerRegister customerreg = new CustomerRegister();
         customerreg.setVisible(true);
     }//GEN-LAST:event_customeregisteringActionPerformed
 
