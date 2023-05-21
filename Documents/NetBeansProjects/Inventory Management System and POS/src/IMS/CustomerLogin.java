@@ -8,6 +8,9 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Raidi
+ *
+ * NOTE: THIS JAVA CLASS IS OLD, I HAVE A NEW AND REWORKED VER.
+ * DELETE THIS IF AND ONLY IF THE NEW ONE IS WORKING.
  */
 public class CustomerLogin extends javax.swing.JFrame {
 
@@ -143,13 +146,13 @@ public class CustomerLogin extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Username");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(430, 120, 70, 18);
+        jLabel6.setBounds(430, 120, 70, 19);
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Password");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(430, 200, 80, 18);
+        jLabel7.setBounds(430, 200, 80, 19);
 
         customerspasswordlogin.setForeground(new java.awt.Color(102, 102, 102));
         customerspasswordlogin.addActionListener(new java.awt.event.ActionListener() {
@@ -175,14 +178,14 @@ public class CustomerLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(690, 400, 72, 30);
+        jButton4.setBounds(690, 400, 65, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void costumerconfirmloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costumerconfirmloginActionPerformed
         // Entered / Stored Customer Details
-        // CustomerRegister customerreg = new CustomerRegister();
+        // CustomerRegisterOldShit customerreg = new CustomerRegisterOldShit();
         
         // Costumer confirms to login
         String usernamelog = customerusernamelogin.getText();
@@ -206,7 +209,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     private void customeregisteringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customeregisteringActionPerformed
         // Goes to the Register Form for Customers
         dispose();
-        CustomerRegister customerreg = new CustomerRegister();
+        CustomerRegisterOldShit customerreg = new CustomerRegisterOldShit();
         customerreg.setVisible(true);
     }//GEN-LAST:event_customeregisteringActionPerformed
 
