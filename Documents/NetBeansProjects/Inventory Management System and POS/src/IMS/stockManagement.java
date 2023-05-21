@@ -58,6 +58,8 @@ public class stockManagement extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         importData = new javax.swing.JButton();
         backupButton1 = new javax.swing.JButton();
+        budget = new javax.swing.JLabel();
+        budgetLabel = new javax.swing.JLabel();
 
         editItem.setText("STOCKS");
         editItem.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +101,7 @@ public class stockManagement extends javax.swing.JFrame {
 
         deleteButton.setBackground(new java.awt.Color(102, 102, 102));
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButton.setText("DELETE ITEM");
+        deleteButton.setText("RETURN ITEM");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -117,7 +119,7 @@ public class stockManagement extends javax.swing.JFrame {
 
         addButton.setBackground(new java.awt.Color(102, 102, 102));
         addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("ADD & ORDER ITEM");
+        addButton.setText("ORDER ITEM");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
@@ -163,7 +165,7 @@ public class stockManagement extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(quantityLabel)
@@ -177,8 +179,8 @@ public class stockManagement extends javax.swing.JFrame {
                             .addComponent(descripLabel)
                             .addComponent(priceLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(descripText, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descripText)
                             .addComponent(priceText)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,7 +228,7 @@ public class stockManagement extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID#", "Product", "Description", "Quantity", "Price ( $ )", "Total Price ($)"
+                "ID#", "Product", "Description", "Quantity (Bottles)", "Price ( $ )", "Total Price ($)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -278,6 +280,18 @@ public class stockManagement extends javax.swing.JFrame {
         });
         jPanel1.add(backupButton1);
         backupButton1.setBounds(40, 460, 125, 39);
+
+        budget.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        budget.setForeground(new java.awt.Color(255, 255, 255));
+        budget.setText("10000");
+        jPanel1.add(budget);
+        budget.setBounds(370, 460, 150, 70);
+
+        budgetLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        budgetLabel.setForeground(new java.awt.Color(255, 255, 255));
+        budgetLabel.setText("BUDGET: $");
+        jPanel1.add(budgetLabel);
+        budgetLabel.setBounds(190, 460, 190, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,40 +348,63 @@ public class stockManagement extends javax.swing.JFrame {
             int quantityInt = Integer.parseInt(quantityText.getText());
             int priceInt = Integer.parseInt(priceText.getText());
             String targetUID = null;
-            
             int totalPrice = quantityInt * priceInt;
-            for (int row = 0; row < itemList.getRowCount(); row++){
-                targetUID = itemList.getValueAt(row, 0).toString();
             
-            if (UID.equals(targetUID))
-            {
-                String quantityString = itemList.getValueAt(row,3).toString();
-                int existingQuantity = Integer.parseInt(quantityString);
-                int totalInt = quantityInt + existingQuantity;
-                String totalIntString = String.valueOf(totalInt);
-                itemList.setValueAt(totalIntString, row, 3);
+            int prompt = JOptionPane.showOptionDialog(
+                null, // Parent component (null for default)
+                "Total Cost is $"+totalPrice+".\nDo you want to continue the Transaction?", // Message
+                "Confirmation", // Title
+                JOptionPane.YES_NO_OPTION, // Option type
+                JOptionPane.QUESTION_MESSAGE, // Message type
+                null, // Icon (null for default)
+                new String[]{"Yes", "No"}, // Options
+                "Yes" // Default option
+            );
+            if (prompt == JOptionPane.YES_OPTION){
                 
-                String totalPriceString = itemList.getValueAt(row,4).toString();
-                int totalPriceInt = Integer.parseInt(totalPriceString);
-                int newTotalPrice = totalPriceInt * totalInt;
+                //deducting budget
+                String budgetString = budget.getText();
+                int budgetInt = Integer.parseInt(budgetString);
+                int remainingBudget = budgetInt - totalPrice;
+                budgetString = String.valueOf(remainingBudget);
+                budget.setText(budgetString);
                 
-                itemList.setValueAt(newTotalPrice, row, 5);
-                productList.setSelectedIndex(0);
-                descripText.setText("");
-                quantityText.setText("");
-                priceText.setText("");
-                JOptionPane.showMessageDialog(this, "Product successfuly added");
-            }
-            }
-            if (!UID.equals(targetUID))
-            {
-                model.insertRow(model.getRowCount(),new Object[] {UID,productList.getSelectedItem().toString(),descripText.getText(),
-                    quantityText.getText(),priceText.getText(),totalPrice});
-                productList.setSelectedIndex(0);
-                descripText.setText("");
-                quantityText.setText("");
-                priceText.setText("");
-                JOptionPane.showMessageDialog(this, "Product successfuly added");
+                
+                    for (int row = 0; row < itemList.getRowCount(); row++){
+                    targetUID = itemList.getValueAt(row, 0).toString();
+
+                if (UID.equals(targetUID))
+                {
+                    String quantityString = itemList.getValueAt(row,3).toString();
+                    int existingQuantity = Integer.parseInt(quantityString);
+                    int totalInt = quantityInt + existingQuantity;
+                    String totalIntString = String.valueOf(totalInt);
+                    itemList.setValueAt(totalIntString, row, 3);
+
+                    String totalPriceString = itemList.getValueAt(row,4).toString();
+                    int totalPriceInt = Integer.parseInt(totalPriceString);
+                    int newTotalPrice = totalPriceInt * totalInt;
+
+                    itemList.setValueAt(newTotalPrice, row, 5);
+                    productList.setSelectedIndex(0);
+                    descripText.setText("");
+                    quantityText.setText("");
+                    priceText.setText("");
+                    JOptionPane.showMessageDialog(this, "Product successfuly added");
+                }
+                }
+                if (!UID.equals(targetUID))
+                {
+                    model.insertRow(model.getRowCount(),new Object[] {UID,productList.getSelectedItem().toString(),descripText.getText(),
+                        quantityText.getText(),priceText.getText(),totalPrice});
+                    productList.setSelectedIndex(0);
+                    descripText.setText("");
+                    quantityText.setText("");
+                    priceText.setText("");
+                    JOptionPane.showMessageDialog(this, "Product successfuly added");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Transaction Cancelled");
             }
         }
     }//GEN-LAST:event_addButtonActionPerformed
@@ -381,20 +418,44 @@ public class stockManagement extends javax.swing.JFrame {
                
             int quantityInt = Integer.parseInt(quantityText.getText());
             int priceInt = Integer.parseInt(priceText.getText());
-
+            String existingQuantity = itemList.getValueAt(itemList.getSelectedRow(), 3).toString();
+            int existingQuantityInt = Integer.parseInt(existingQuantity);
+            
             int totalPrice = quantityInt * priceInt;
             
-            itemList.setValueAt(UID, itemList.getSelectedRow(),0);
-            itemList.setValueAt(description, itemList.getSelectedRow(), 2);
-            itemList.setValueAt(quantity, itemList.getSelectedRow(), 3);
-            itemList.setValueAt(price, itemList.getSelectedRow(), 4);
-            itemList.setValueAt(totalPrice, itemList.getSelectedRow(), 5);
-            JOptionPane.showMessageDialog(this, "Product successfuly updated");
-            productList.setSelectedIndex(0);
-            descripText.setText("");
-            quantityText.setText("");
-            priceText.setText("");
-            itemList.getSelectionModel().clearSelection();
+            int pricee = (quantityInt - existingQuantityInt) * priceInt;
+            //deducting budget
+            int prompt = JOptionPane.showOptionDialog(
+                null, // Parent component (null for default)
+                "Total is $"+pricee+".\nDo you want to continue the Transaction?", // Message
+                "Confirmation", // Title
+                JOptionPane.YES_NO_OPTION, // Option type
+                JOptionPane.QUESTION_MESSAGE, // Message type
+                null, // Icon (null for default)
+                new String[]{"Yes", "No"}, // Options
+                "Yes" // Default option
+            );
+            if (prompt == JOptionPane.YES_OPTION) {
+                String budgetString = budget.getText();
+                int budgetInt = Integer.parseInt(budgetString);
+                int remainingBudget = budgetInt - pricee;
+                budgetString = String.valueOf(remainingBudget);
+                budget.setText(budgetString);
+
+                itemList.setValueAt(UID, itemList.getSelectedRow(),0);
+                itemList.setValueAt(description, itemList.getSelectedRow(), 2);
+                itemList.setValueAt(quantity, itemList.getSelectedRow(), 3);
+                itemList.setValueAt(price, itemList.getSelectedRow(), 4);
+                itemList.setValueAt(totalPrice, itemList.getSelectedRow(), 5);
+                JOptionPane.showMessageDialog(this, "Product successfuly updated");
+                productList.setSelectedIndex(0);
+                descripText.setText("");
+                quantityText.setText("");
+                priceText.setText("");
+                itemList.getSelectionModel().clearSelection();
+            }else {
+                JOptionPane.showMessageDialog(this, "Update Cancelled");
+            }
         }
         else{
             if(itemList.getRowCount()==0){
@@ -409,13 +470,41 @@ public class stockManagement extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         if (itemList.getSelectedRowCount()==1){
-            model.removeRow(itemList.getSelectedRow());
-            productList.setSelectedIndex(0);
-            descripText.setText("");
-            quantityText.setText("");
-            priceText.setText("");
-            itemList.getSelectionModel().clearSelection();
-            JOptionPane.showMessageDialog(this, "Product successfuly removed");
+            //deducting budget
+            
+            int quantityInt = Integer.parseInt(quantityText.getText());
+            int priceInt = Integer.parseInt(priceText.getText());
+            int totalPrice = quantityInt * priceInt;
+            int laborFee = (int) (totalPrice*0.3);
+            totalPrice -= laborFee;
+            
+            int prompt = JOptionPane.showOptionDialog(
+                null, // Parent component (null for default)
+                "You will only receive $"+totalPrice+".\n$"+laborFee+" will be deducted for the Delivery and Labor Fee.\nDo you still want to return the Item(s)?", // Message
+                "Confirmation", // Title
+                JOptionPane.YES_NO_OPTION, // Option type
+                JOptionPane.QUESTION_MESSAGE, // Message type
+                null, // Icon (null for default)
+                new String[]{"Yes", "No"}, // Options
+                "Yes" // Default option
+            );
+            if (prompt == JOptionPane.YES_OPTION){
+                String budgetString = budget.getText();
+                int budgetInt = Integer.parseInt(budgetString);
+                int remainingBudget = budgetInt + totalPrice;
+                budgetString = String.valueOf(remainingBudget);
+                budget.setText(budgetString);
+                model.removeRow(itemList.getSelectedRow());
+                productList.setSelectedIndex(0);
+                descripText.setText("");
+                quantityText.setText("");
+                priceText.setText("");
+                itemList.getSelectionModel().clearSelection();
+                JOptionPane.showMessageDialog(this, "Product successfuly removed");
+            }else {
+                JOptionPane.showMessageDialog(this, "Item Return Cancelled");
+            }
+            
         }
         else{
             if(itemList.getRowCount()==0){
@@ -518,7 +607,7 @@ public class stockManagement extends javax.swing.JFrame {
 
     private void importDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importDataActionPerformed
         // TODO add your handling code here:
-        String filepath = "C:\\Users\\JohnR\\AppData\\Roaming\\data.txt";
+        String filepath = "data.txt";
         File file = new File(filepath);
         
         if (!file.exists()){
@@ -548,7 +637,7 @@ public class stockManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (itemList.getRowCount()!= 0)
         {
-            String filepath = "C:\\Users\\JohnR\\AppData\\Roaming\\data.txt";
+            String filepath = "data.txt";
             File file = new File(filepath);
 
             try{
@@ -624,6 +713,8 @@ public class stockManagement extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backupButton1;
+    private javax.swing.JLabel budget;
+    private javax.swing.JLabel budgetLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel descripLabel;
     private javax.swing.JTextField descripText;
