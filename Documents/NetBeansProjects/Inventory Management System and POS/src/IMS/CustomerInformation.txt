@@ -1,0 +1,8 @@
+
+Username: qwe
+Password: qwe
+Email Address: qwe
+(day/month/year) Birthday: 12/34/56
+Credit Card Number: 09665
+Credit Card Pin: 4852
+Credit Amount: 50000
