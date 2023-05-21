@@ -89,31 +89,31 @@ public class CustomerRegister extends javax.swing.JFrame {
         jLabel8.setText("Credit Card No#:");
 
         customerusernamereg.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerusernamereg.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerusernamereg.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerpasswordreg.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerpasswordreg.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerpasswordreg.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customeremailreg.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customeremailreg.setPreferredSize(new java.awt.Dimension(60, 20));
+        customeremailreg.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerbdday.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerbdday.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerbdday.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerccn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerccn.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerccn.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerccp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerccp.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerccp.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerca.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerca.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerca.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerbdmonth.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerbdmonth.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerbdmonth.setPreferredSize(new java.awt.Dimension(60, 25));
 
         customerbdyear.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        customerbdyear.setPreferredSize(new java.awt.Dimension(60, 20));
+        customerbdyear.setPreferredSize(new java.awt.Dimension(60, 25));
 
         gotologin.setText("Login");
         gotologin.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +208,7 @@ public class CustomerRegister extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotologin)
                     .addComponent(confirmregister))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();
