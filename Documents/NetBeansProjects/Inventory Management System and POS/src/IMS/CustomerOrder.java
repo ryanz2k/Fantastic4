@@ -6,6 +6,12 @@ package IMS;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Raidi
@@ -588,6 +594,27 @@ public class CustomerOrder extends javax.swing.JFrame {
 
     private void comfirmcartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirmcartActionPerformed
         // Stores the User's Cart List
+        String FilePath = "C:\\Users\\Raidi\\Documents\\ComProgIMSProject\\trunk\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\IMS\\CustomerCart.txt";
+        
+        if(customercart.getRowCount() != 0){
+            try {
+                BufferedWriter cartlist = new BufferedWriter(new FileWriter(FilePath));
+                
+                for(int R = 0; R < customercart.getRowCount(); R++){
+                    for(int C = 0; C < customercart.getColumnCount(); C++){
+                        cartlist.write("\n"+customercart.getValueAt(R,C).toString()+" ");
+                    }
+                }
+                cartlist.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "There is no data to be saved");
+        }
+
     }//GEN-LAST:event_comfirmcartActionPerformed
 
     /**
