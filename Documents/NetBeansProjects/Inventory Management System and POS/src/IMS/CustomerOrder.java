@@ -587,7 +587,7 @@ public class CustomerOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteitemActionPerformed
 
     private void comfirmcartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirmcartActionPerformed
-        // TODO add your handling code here:
+        // Stores the User's Cart List
     }//GEN-LAST:event_comfirmcartActionPerformed
 
     /**
