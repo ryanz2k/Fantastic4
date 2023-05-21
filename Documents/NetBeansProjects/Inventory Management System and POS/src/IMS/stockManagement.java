@@ -4,6 +4,7 @@
  */
 package IMS;
 
+import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Ryan
  */
 public class stockManagement extends javax.swing.JFrame {
+    private String UID;
     DefaultTableModel model;
     
    /**
@@ -54,6 +56,8 @@ public class stockManagement extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         itemList = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        importData = new javax.swing.JButton();
+        backupButton1 = new javax.swing.JButton();
 
         editItem.setText("STOCKS");
         editItem.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +81,6 @@ public class stockManagement extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stock Management");
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -197,11 +200,12 @@ public class stockManagement extends javax.swing.JFrame {
                     .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateButton))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(descripLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(productList)
-                    .addComponent(descripText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(descripLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(productList)
+                        .addComponent(descripText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,16 +220,17 @@ public class stockManagement extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(40, 290, 720, 160);
 
+        itemList.setAutoCreateRowSorter(true);
         itemList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Product", "Description", "Quantity", "Price ( $ )"
+                "ID#", "Product", "Description", "Quantity", "Price ( $ )", "Total Price ($)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -243,6 +248,8 @@ public class stockManagement extends javax.swing.JFrame {
             itemList.getColumnModel().getColumn(1).setResizable(false);
             itemList.getColumnModel().getColumn(2).setResizable(false);
             itemList.getColumnModel().getColumn(3).setResizable(false);
+            itemList.getColumnModel().getColumn(4).setResizable(false);
+            itemList.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jPanel1.add(jScrollPane1);
@@ -250,21 +257,37 @@ public class stockManagement extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
         jPanel1.add(jButton1);
-        jButton1.setBounds(380, 140, 78, 23);
+        jButton1.setBounds(380, 140, 75, 23);
+
+        importData.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        importData.setText("IMPORT DATA");
+        importData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importDataActionPerformed(evt);
+            }
+        });
+        jPanel1.add(importData);
+        importData.setBounds(540, 460, 220, 39);
+
+        backupButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        backupButton1.setText("BACKUP");
+        backupButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backupButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(backupButton1);
+        backupButton1.setBounds(40, 460, 125, 39);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -285,12 +308,14 @@ public class stockManagement extends javax.swing.JFrame {
 
     private void itemListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemListMouseClicked
         // TODO add your handling code here:\
-        String selectedItem = itemList.getValueAt(itemList.getSelectedRow(), 0).toString();
-        String tblDescription = itemList.getValueAt(itemList.getSelectedRow(), 1).toString();
-        String tblQuantity = itemList.getValueAt(itemList.getSelectedRow(), 2).toString();
-        String tblPrice = itemList.getValueAt(itemList.getSelectedRow(), 3).toString();
+        String IDDescription = itemList.getValueAt(itemList.getSelectedRow(), 0).toString();
+        String tblDescription = itemList.getValueAt(itemList.getSelectedRow(), 2).toString();
+        String tblQuantity = itemList.getValueAt(itemList.getSelectedRow(), 3).toString();
+        String tblPrice = itemList.getValueAt(itemList.getSelectedRow(), 4).toString();
         
-
+        int IDint = Integer.parseInt(IDDescription);
+        
+        productList.setSelectedIndex(IDint);
         descripText.setText(tblDescription);
         quantityText.setText(tblQuantity);
         priceText.setText(tblPrice);
@@ -302,16 +327,48 @@ public class stockManagement extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // Validate if empty
-        
         if (descripText.getText().equals("")||quantityText.getText().equals("")||priceText.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Please Fill in The Blanks","Error",JOptionPane.ERROR_MESSAGE);
         }
         else{
-            model.insertRow(model.getRowCount(),new Object[] {productList.getSelectedItem().toString(),descripText.getText(),quantityText.getText(),priceText.getText()});
-            descripText.setText("");
-            quantityText.setText("");
-            priceText.setText("");
-            JOptionPane.showMessageDialog(this, "Product successfuly added");
+            int quantityInt = Integer.parseInt(quantityText.getText());
+            int priceInt = Integer.parseInt(priceText.getText());
+            String targetUID = null;
+            
+            int totalPrice = quantityInt * priceInt;
+            for (int row = 0; row < itemList.getRowCount(); row++){
+                targetUID = itemList.getValueAt(row, 0).toString();
+            
+            if (UID.equals(targetUID))
+            {
+                String quantityString = itemList.getValueAt(row,3).toString();
+                int existingQuantity = Integer.parseInt(quantityString);
+                int totalInt = quantityInt + existingQuantity;
+                String totalIntString = String.valueOf(totalInt);
+                itemList.setValueAt(totalIntString, row, 3);
+                
+                String totalPriceString = itemList.getValueAt(row,4).toString();
+                int totalPriceInt = Integer.parseInt(totalPriceString);
+                int newTotalPrice = totalPriceInt * totalInt;
+                
+                itemList.setValueAt(newTotalPrice, row, 5);
+                productList.setSelectedIndex(0);
+                descripText.setText("");
+                quantityText.setText("");
+                priceText.setText("");
+                JOptionPane.showMessageDialog(this, "Product successfuly added");
+            }
+            }
+            if (!UID.equals(targetUID))
+            {
+                model.insertRow(model.getRowCount(),new Object[] {UID,productList.getSelectedItem().toString(),descripText.getText(),
+                    quantityText.getText(),priceText.getText(),totalPrice});
+                productList.setSelectedIndex(0);
+                descripText.setText("");
+                quantityText.setText("");
+                priceText.setText("");
+                JOptionPane.showMessageDialog(this, "Product successfuly added");
+            }
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -321,12 +378,19 @@ public class stockManagement extends javax.swing.JFrame {
             String description = descripText.getText();
             String quantity = quantityText.getText();
             String price = priceText.getText();
+               
+            int quantityInt = Integer.parseInt(quantityText.getText());
+            int priceInt = Integer.parseInt(priceText.getText());
 
-
-            itemList.setValueAt(description, itemList.getSelectedRow(), 1);
-            itemList.setValueAt(quantity, itemList.getSelectedRow(), 2);
-            itemList.setValueAt(price, itemList.getSelectedRow(), 3);
+            int totalPrice = quantityInt * priceInt;
+            
+            itemList.setValueAt(UID, itemList.getSelectedRow(),0);
+            itemList.setValueAt(description, itemList.getSelectedRow(), 2);
+            itemList.setValueAt(quantity, itemList.getSelectedRow(), 3);
+            itemList.setValueAt(price, itemList.getSelectedRow(), 4);
+            itemList.setValueAt(totalPrice, itemList.getSelectedRow(), 5);
             JOptionPane.showMessageDialog(this, "Product successfuly updated");
+            productList.setSelectedIndex(0);
             descripText.setText("");
             quantityText.setText("");
             priceText.setText("");
@@ -346,8 +410,12 @@ public class stockManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (itemList.getSelectedRowCount()==1){
             model.removeRow(itemList.getSelectedRow());
-            JOptionPane.showMessageDialog(this, "Product successfuly removed");
+            productList.setSelectedIndex(0);
+            descripText.setText("");
+            quantityText.setText("");
+            priceText.setText("");
             itemList.getSelectionModel().clearSelection();
+            JOptionPane.showMessageDialog(this, "Product successfuly removed");
         }
         else{
             if(itemList.getRowCount()==0){
@@ -371,77 +439,147 @@ public class stockManagement extends javax.swing.JFrame {
         String selectedItem = productList.getSelectedItem().toString();
         switch (selectedItem){
             case "Chardonnay Wine":
+                UID = "001";
                 descripText.setText("Popular dry white wine");
-                priceText.setText("$25");
+                priceText.setText("25");
                 break;
             case "Cabernet Sauvignon Wine":
+                UID = "002";
                 descripText.setText("Bold, full-bodied red wine");
-                priceText.setText("$15");
+                priceText.setText("15");
                 break;
             case "Stout Beer":
+                UID = "003";
                 descripText.setText("Dark, roasted, malty beer");
-                priceText.setText("$8");
+                priceText.setText("8");
                 break;
             case "Schwarzbier":
+                UID = "004";
                 descripText.setText("German-style black lager");
-                priceText.setText("$10");
+                priceText.setText("10");
                 break;
             case "Scotch Whisky":
+                UID = "005";
                 descripText.setText("Smoky, peaty Scottish whisky");
-                priceText.setText("$30");
+                priceText.setText("30");
                 break;
             case "Bourbon Whisky":
+                UID = "006";
                 descripText.setText("American oak-aged whisky");
-                priceText.setText("$20");
+                priceText.setText("20");
                 break;
             case "Plymouth Gin":
+                UID = "007";
                 descripText.setText("Classic, citrusy British gin");
-                priceText.setText("$20");
+                priceText.setText("20");
                 break;
             case "Old Tom Gin":
+                UID = "008";
                 descripText.setText("Slightly sweetened gin variety");
-                priceText.setText("$25");
+                priceText.setText("25");
                 break;
             case "Sweet Cider":
+                UID = "009";
                 descripText.setText("Apple juice with alcohol");
-                priceText.setText("$8");
+                priceText.setText("8");
                 break;
             case "Bitter Cider":
+                UID = "010";
                 descripText.setText("Dry, tart apple cider");
-                priceText.setText("$8");
+                priceText.setText("8");
                 break;
             case "Fruit Vodka":
+                UID = "011";
                 descripText.setText("Vodka with fruit flavoring");
-                priceText.setText("$15");
+                priceText.setText("15");
                 break;
             case "Plain Vodka":
+                UID = "012";
                 descripText.setText("Neutral, clear spirit");
-                priceText.setText("$10");
+                priceText.setText("10");
                 break;
             case "Distilled Soju":
+                UID = "013";
                 descripText.setText("Clear Korean liquor");
-                priceText.setText("$15");
+                priceText.setText("15");
                 break;
             case "Navy Rum":
+                UID = "014";
                 descripText.setText("High-proof, spiced rum");
-                priceText.setText("$15");
+                priceText.setText("15");
                 break;
             case "Rhum Agricole":
+                UID = "015";
                 descripText.setText("French Caribbean rum variety");
-                priceText.setText("$30");
+                priceText.setText("30");
                 break;      
         }
     }//GEN-LAST:event_productListActionPerformed
+
+    private void importDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importDataActionPerformed
+        // TODO add your handling code here:
+        String filepath = "C:\\Users\\JohnR\\AppData\\Roaming\\data.txt";
+        File file = new File(filepath);
+        
+        if (!file.exists()){
+            JOptionPane.showMessageDialog(this, "There are no Backup Data");
+        } else{
+            try{
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                model.setRowCount(0);
+                model = (DefaultTableModel)itemList.getModel();
+                Object[] lines = br.lines().toArray();
+
+                for(int i = 0; i < lines.length; i++){
+                    String[] row = lines[i].toString().split("_");
+                    model.addRow(row);
+            }
+            } catch (IOException ex){
+                java.util.logging.Logger.getLogger(stockManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, "Data Successfully Imported");
+        }
+        
+        
+    }//GEN-LAST:event_importDataActionPerformed
+
+    private void backupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButton1ActionPerformed
+        // TODO add your handling code here:
+        if (itemList.getRowCount()!= 0)
+        {
+            String filepath = "C:\\Users\\JohnR\\AppData\\Roaming\\data.txt";
+            File file = new File(filepath);
+
+            try{
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                for(int i = 0; i < itemList.getRowCount(); i++){
+                    for (int j = 0; j < itemList.getColumnCount(); j++){
+                        bw.write(itemList.getValueAt(i,j).toString()+"_");
+                    }
+                    bw.newLine();
+                }
+                bw.close();
+                fw.close();
+
+            } catch (IOException ex){
+                java.util.logging.Logger.getLogger(stockManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, "Backup has been Created");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "There is no data to be saved");
+        }
+        
+    }//GEN-LAST:event_backupButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -485,10 +623,12 @@ public class stockManagement extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton backupButton1;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel descripLabel;
     private javax.swing.JTextField descripText;
     private javax.swing.JButton editItem;
+    private javax.swing.JButton importData;
     private javax.swing.JTable itemList;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
