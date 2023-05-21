@@ -59,6 +59,7 @@ public class CustomerOrder extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         customercart = new javax.swing.JTable();
         deleteitem = new javax.swing.JButton();
+        comfirmcart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -274,6 +275,13 @@ public class CustomerOrder extends javax.swing.JFrame {
             }
         });
 
+        comfirmcart.setText("Confirm");
+        comfirmcart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comfirmcartActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,7 +344,10 @@ public class CustomerOrder extends javax.swing.JFrame {
                                     .addComponent(bittercider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(scotchwhisky, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rhumagricole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 44, Short.MAX_VALUE)))
+                        .addGap(0, 44, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(comfirmcart)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -405,7 +416,9 @@ public class CustomerOrder extends javax.swing.JFrame {
                             .addComponent(addtocart))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deleteitem)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(comfirmcart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(backtoprofile)
                 .addGap(44, 44, 44))
         );
@@ -573,6 +586,10 @@ public class CustomerOrder extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteitemActionPerformed
 
+    private void comfirmcartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirmcartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comfirmcartActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -616,6 +633,7 @@ public class CustomerOrder extends javax.swing.JFrame {
     private javax.swing.JButton cabernetsauvignonwine;
     private javax.swing.JButton calculatetotalprice;
     private javax.swing.JButton chardonnaywine;
+    private javax.swing.JButton comfirmcart;
     private javax.swing.JTable customercart;
     private javax.swing.JButton deleteitem;
     private javax.swing.JButton distilledsoju;
