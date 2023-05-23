@@ -1,13 +1,12 @@
 package IMS;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Personal
- */
+
 public class POSSignUp extends javax.swing.JFrame {
     
     public POSSignUp() {
@@ -201,37 +200,61 @@ public class POSSignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_employeePasswordActionPerformed
 
     private void employeeSignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSignUpButtonActionPerformed
-       
+     
         String fullnameEmployee = employeeFullname.getText();
         String usernameEmployee = employeeUsername.getText();
         String passwordEmployee = new String(employeePassword.getPassword());
-       
-        if (fullnameEmployee.isEmpty() || usernameEmployee.isEmpty() || passwordEmployee.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please fill in all fields.");
-        return;
-    }
+        String DIRECTORY_PATH = "NetbeansProject/Inventory Management and POS/ F4 Data"; 
         
-        
-      try {
-        String fileName = fullnameEmployee + ".txt";
-        FileWriter writer = new FileWriter(fileName, true);
-        writer.write(" " + fullnameEmployee + " " + usernameEmployee + " " + passwordEmployee);
-        writer.write(System.lineSeparator());
-        writer.close();
-        JOptionPane.showMessageDialog(null, "Sign-up successful!");
-        clearFields();
-        new InsertData().setVisible(true);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error occurred while saving data.");
-      }    
-      
-    }//GEN-LAST:event_employeeSignUpButtonActionPerformed
+         if (fullnameEmployee.isEmpty() || usernameEmployee.isEmpty() || passwordEmployee.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Error: Please fill in all fields");
+            return; 
+        }
+ 
+     
+            File directory = new File(DIRECTORY_PATH);
+            if (directory.exists()) {
+            } else {
+                directory.mkdirs(); // Create the directory if it doesn't exist
+        }
+            
+             try {
+                File file = new File(DIRECTORY_PATH,fullnameEmployee + ".txt");
+                
+                
+                if (file.exists()) {
+                    JOptionPane.showMessageDialog(null,"Error: Account already exists");
+                    return; 
+                }
+                
+            
+                FileWriter writer = new FileWriter(file);
+                
+            try (BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
+                bufferedWriter.write("Full Name: " + fullnameEmployee);
+                bufferedWriter.newLine();
+                bufferedWriter.write("Username: " + usernameEmployee);
+                bufferedWriter.newLine();
+                bufferedWriter.write("Password: " + passwordEmployee);
+            }
+                JOptionPane.showMessageDialog(null,"Account Successfully Registered!");
 
-     private void clearFields() {
-        employeeFullname.setText("");
-        employeeUsername.setText("");
-        employeePassword.setText("");
-    }
+                
+                 POSLogin POSLoginFrame = new  POSLogin();
+                 POSLoginFrame.setVisible(true);
+                 POSLoginFrame.pack();
+                 POSLoginFrame.setLocationRelativeTo(null); 
+                 this.dispose();
+                
+                
+            } catch (IOException e) {
+                 JOptionPane.showMessageDialog(null,"An error occurred: " + e.getMessage());
+            }
+             
+
+          
+             
+    }//GEN-LAST:event_employeeSignUpButtonActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        
@@ -265,14 +288,10 @@ public class POSSignUp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private static class InsertData {
+ 
 
-        public InsertData() {
-        }
-
-        private void setVisible(boolean b) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
     }
 
-}
+
+
+
