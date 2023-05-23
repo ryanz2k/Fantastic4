@@ -12,9 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
 
 /**
  *
@@ -41,10 +39,10 @@ public class CustomerLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        passwordlogin = new javax.swing.JTextField();
         usernamelogin = new javax.swing.JTextField();
         gotoregister = new javax.swing.JButton();
         confirmtologin = new javax.swing.JButton();
+        passwordlogin = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,8 +57,6 @@ public class CustomerLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Password:");
-
-        passwordlogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         usernamelogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -78,33 +74,37 @@ public class CustomerLogin extends javax.swing.JFrame {
             }
         });
 
+        passwordlogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(350, 350, 350))
             .addGroup(layout.createSequentialGroup()
-                .addGap(334, 334, 334)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(gotoregister)
-                        .addGap(18, 18, 18)
-                        .addComponent(confirmtologin))
-                    .addComponent(passwordlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usernamelogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addGap(173, 173, 173))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(gotoregister)
+                                .addGap(18, 18, 18)
+                                .addComponent(confirmtologin))
+                            .addComponent(usernamelogin)
+                            .addComponent(passwordlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(499, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -118,7 +118,7 @@ public class CustomerLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoregister)
                     .addComponent(confirmtologin))
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,46 +133,56 @@ public class CustomerLogin extends javax.swing.JFrame {
 
     private void confirmtologinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmtologinActionPerformed
         // Sends user to his/her profile
-        String usernamefile = "";
-        String passwordfile = "";
-        
         String usernamelog = usernamelogin.getText();
-        String passwordlog = passwordlogin.getText();
+        String passwordlog = new String(passwordlogin.getPassword());
+        String filepath = "C:\\Users\\Raidi\\Documents\\ComProgIMSProject\\trunk\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\IMS";
+        File path = new File(filepath);
         
-        try {
-            BufferedReader readfile = new BufferedReader(new FileReader("C:\\Users\\Raidi\\Documents\\ComProgIMSProject\\trunk\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\IMS\\"+usernamelog+".txt"));
-            
-            for(int findstring = 0; findstring < 12; findstring++){
-                if(findstring == 2){
-                    try {
-                        usernamefile = readfile.readLine();
-                    } catch (IOException ex) {
-                        Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+        if(!path.exists() || !path.isDirectory()){
+            JOptionPane.showMessageDialog(null, "Error: Account doesn't exist");
+            return;
+        }
+        
+        boolean accounthere = false;
+        
+        File[] thisfile = path.listFiles();
+        if(thisfile != null){
+            for(File reading : thisfile){
+                if(reading.isFile()){
+                    try (BufferedReader readthefile = new BufferedReader(new FileReader(reading))){
+                        String usernamefile = null;
+                        String passwordfile = null;
+                        String eachline;
+                        
+                        while((eachline = readthefile.readLine()) != null){
+                            if(eachline.startsWith("Username:")){
+                                usernamefile = eachline.substring(eachline.indexOf(":") + 1).trim();
+                            }
+                            else if(eachline.startsWith("Password:")){
+                                passwordfile = eachline.substring(eachline.indexOf(":") + 1).trim();
+                            }
+                        }
+                        
+                        if(usernamefile != null && passwordfile != null && 
+                           usernamefile.equals(usernamelog) && passwordfile.equals(passwordlog)){
+                            accounthere = true;
+                            break;
+                        }
+                        
                     }
-                }
-                if(findstring == 3){
-                    try {
-                        passwordfile = readfile.readLine();
-                    } catch (IOException ex) {
-                        Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage());
+                        return;
                     }
                 }
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         
-        if(usernamelog.equals(usernamefile) && passwordlog.equals(passwordfile)){
-            JOptionPane.showMessageDialog(this, "Successfully Logged In!");
-            dispose();
-            CustomerProfile logintoprofile = new CustomerProfile();
-            logintoprofile.setVisible(true);
-        }
-        else if(!usernamelog.equals(usernamefile) || !passwordlog.equals(passwordfile)){
-            JOptionPane.showMessageDialog(this,"Wrong Username or Password","Error",JOptionPane.ERROR_MESSAGE);
-            usernamelogin.setText("");
-            passwordlogin.setText("");
+        if (accounthere) {
+            JOptionPane.showMessageDialog(null, "Successfully Login");
+           
+        } else {
+            JOptionPane.showMessageDialog(null, "Account does not Exist");
         }
     }//GEN-LAST:event_confirmtologinActionPerformed
 
@@ -217,7 +227,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField passwordlogin;
+    private javax.swing.JPasswordField passwordlogin;
     private javax.swing.JTextField usernamelogin;
     // End of variables declaration//GEN-END:variables
 }
