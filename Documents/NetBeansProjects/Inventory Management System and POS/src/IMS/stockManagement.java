@@ -4,15 +4,10 @@
  */
 package IMS;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.*;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.*;
+
 
 /**
  *
@@ -20,6 +15,7 @@ import org.jfree.data.category.*;
  */
 public class stockManagement extends javax.swing.JFrame {
     private String UID;
+    private boolean canImport = true;
     DefaultTableModel model;
     
    /**
@@ -63,10 +59,11 @@ public class stockManagement extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         itemList = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        backupButton1 = new javax.swing.JButton();
+        backupButton = new javax.swing.JButton();
         budget = new javax.swing.JLabel();
         budgetLabel = new javax.swing.JLabel();
         importData1 = new javax.swing.JButton();
+        clearTable = new javax.swing.JButton();
 
         editItem.setText("STOCKS");
         editItem.addActionListener(new java.awt.event.ActionListener() {
@@ -280,15 +277,15 @@ public class stockManagement extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(380, 140, 75, 23);
 
-        backupButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        backupButton1.setText("BACKUP");
-        backupButton1.addActionListener(new java.awt.event.ActionListener() {
+        backupButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        backupButton.setText("BACKUP");
+        backupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backupButton1ActionPerformed(evt);
+                backupButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(backupButton1);
-        backupButton1.setBounds(40, 480, 125, 39);
+        jPanel1.add(backupButton);
+        backupButton.setBounds(40, 480, 125, 39);
 
         budget.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         budget.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,6 +308,16 @@ public class stockManagement extends javax.swing.JFrame {
         });
         jPanel1.add(importData1);
         importData1.setBounds(540, 480, 220, 39);
+
+        clearTable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        clearTable.setText("CLEAR TABLE DATA");
+        clearTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearTableActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clearTable);
+        clearTable.setBounds(40, 530, 260, 39);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -369,7 +376,9 @@ public class stockManagement extends javax.swing.JFrame {
             String targetUID = null;
             int totalPrice = quantityInt * priceInt;
             
-            int prompt = JOptionPane.showOptionDialog(
+            
+            if (quantityInt <= 120){
+                int prompt = JOptionPane.showOptionDialog(
                 null, // Parent component (null for default)
                 "Total Cost is $"+totalPrice+".\nDo you want to continue the Transaction?", // Message
                 "Confirmation", // Title
@@ -378,52 +387,94 @@ public class stockManagement extends javax.swing.JFrame {
                 null, // Icon (null for default)
                 new String[]{"Yes", "No"}, // Options
                 "Yes" // Default option
-            );
-            if (prompt == JOptionPane.YES_OPTION){
+                );
+                
                 
                 //deducting budget
                 String budgetString = budget.getText();
                 int budgetInt = Integer.parseInt(budgetString);
                 int remainingBudget = budgetInt - totalPrice;
-                budgetString = String.valueOf(remainingBudget);
-                budget.setText(budgetString);
-                
-                
-                    for (int row = 0; row < itemList.getRowCount(); row++){
-                    targetUID = itemList.getValueAt(row, 0).toString();
+                //check if budget has sufficient funds
+                if (remainingBudget < 0){
+                    JOptionPane.showMessageDialog(this, "Insufficient Funds.\nTransaction Cancelled");
+                }else {
+                    budgetString = String.valueOf(remainingBudget);
+                    budget.setText(budgetString);
+                    if (prompt == JOptionPane.YES_OPTION){
+                        for (int row = 0; row < itemList.getRowCount(); row++){
+                        targetUID = itemList.getValueAt(row, 0).toString();
 
-                if (UID.equals(targetUID))
-                {
-                    String quantityString = itemList.getValueAt(row,3).toString();
-                    int existingQuantity = Integer.parseInt(quantityString);
-                    int totalInt = quantityInt + existingQuantity;
-                    String totalIntString = String.valueOf(totalInt);
-                    itemList.setValueAt(totalIntString, row, 3);
+                        //check UID
+                        if (UID.equals(targetUID))
+                        {
+                            String quantityString = itemList.getValueAt(row,3).toString();
+                            int existingQuantity = Integer.parseInt(quantityString);
+                            int totalInt = quantityInt + existingQuantity;
+                            String totalIntString = String.valueOf(totalInt);
 
-                    String totalPriceString = itemList.getValueAt(row,4).toString();
-                    int totalPriceInt = Integer.parseInt(totalPriceString);
-                    int newTotalPrice = totalPriceInt * totalInt;
+                            if (totalInt <= 120){
+                                itemList.setValueAt(totalIntString, row, 3);
+                            //stock level
+                            String stockLevel = null;
 
-                    itemList.setValueAt(newTotalPrice, row, 5);
-                    productList.setSelectedIndex(0);
-                    descripText.setText("");
-                    quantityText.setText("");
-                    priceText.setText("");
-                    JOptionPane.showMessageDialog(this, "Product successfuly added");
+                            if (quantityInt <= 0){
+                                stockLevel = "Empty Stock";
+                                }
+                                else if (totalInt < 30){
+                                    stockLevel = "Low Stock Level";
+                                } else if (totalInt >= 30 && totalInt < 90){
+                                    stockLevel = "Average Stock Level";
+                                } else if (totalInt <= 120 && totalInt >= 90){
+                                    stockLevel = "High Stock Level";
+                                }
+                                itemList.setValueAt(stockLevel, row, 6);
+
+                                String totalPriceString = itemList.getValueAt(row,4).toString();
+                                int totalPriceInt = Integer.parseInt(totalPriceString);
+                                int newTotalPrice = totalPriceInt * totalInt;
+
+                                itemList.setValueAt(newTotalPrice, row, 5);
+                                productList.setSelectedIndex(0);
+                                descripText.setText("");
+                                quantityText.setText("");
+                                priceText.setText("");
+                                JOptionPane.showMessageDialog(this, "Product successfuly added");
+                                
+                            }else {
+                                JOptionPane.showMessageDialog(this, "Every Product Quantity can't exceed 120 Bottles.");
+                            }
+
+                        }
+                        }
+                        if (!UID.equals(targetUID))
+                        {
+                            //stock level
+                        String stockLevel = null;
+
+                        if (quantityInt <= 0){
+                            stockLevel = "Empty Stock";
+                        }
+                        else if (quantityInt < 30){
+                            stockLevel = "Low Stock Level";
+                        } else if (quantityInt >= 30 && quantityInt < 90){
+                            stockLevel = "Average Stock Level";
+                        } else if (quantityInt <= 120 && quantityInt >= 90){
+                            stockLevel = "High Stock Level";
+                        }
+                            model.insertRow(model.getRowCount(),new Object[] {UID,productList.getSelectedItem().toString(),descripText.getText(),
+                                quantityText.getText(),priceText.getText(),totalPrice,stockLevel});
+                            productList.setSelectedIndex(0);
+                            descripText.setText("");
+                            quantityText.setText("");
+                            priceText.setText("");
+                            JOptionPane.showMessageDialog(this, "Product successfuly added");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Transaction Cancelled");
+                    }
                 }
-                }
-                if (!UID.equals(targetUID))
-                {
-                    model.insertRow(model.getRowCount(),new Object[] {UID,productList.getSelectedItem().toString(),descripText.getText(),
-                        quantityText.getText(),priceText.getText(),totalPrice});
-                    productList.setSelectedIndex(0);
-                    descripText.setText("");
-                    quantityText.setText("");
-                    priceText.setText("");
-                    JOptionPane.showMessageDialog(this, "Product successfuly added");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Transaction Cancelled");
+            } else{
+                JOptionPane.showMessageDialog(this, "Every Product Quantity can't exceed 120 Bottles.");
             }
         }
     }//GEN-LAST:event_addButtonActionPerformed
@@ -439,42 +490,71 @@ public class stockManagement extends javax.swing.JFrame {
             int priceInt = Integer.parseInt(priceText.getText());
             String existingQuantity = itemList.getValueAt(itemList.getSelectedRow(), 3).toString();
             int existingQuantityInt = Integer.parseInt(existingQuantity);
-            
+            //getting the Total Price and Quantity
             int totalPrice = quantityInt * priceInt;
+            int totalInt = quantityInt - existingQuantityInt;
+            int pricee = totalInt * priceInt;
             
-            int pricee = (quantityInt - existingQuantityInt) * priceInt;
-            //deducting budget
-            int prompt = JOptionPane.showOptionDialog(
-                null, // Parent component (null for default)
-                "Total is $"+pricee+".\nDo you want to continue the Transaction?", // Message
-                "Confirmation", // Title
-                JOptionPane.YES_NO_OPTION, // Option type
-                JOptionPane.QUESTION_MESSAGE, // Message type
-                null, // Icon (null for default)
-                new String[]{"Yes", "No"}, // Options
-                "Yes" // Default option
-            );
-            if (prompt == JOptionPane.YES_OPTION) {
+            if (quantityInt <= 120){
+                //deducting budget
                 String budgetString = budget.getText();
                 int budgetInt = Integer.parseInt(budgetString);
                 int remainingBudget = budgetInt - pricee;
-                budgetString = String.valueOf(remainingBudget);
-                budget.setText(budgetString);
+                //check if budget has sufficient funds
+                if (remainingBudget < 0){
+                    JOptionPane.showMessageDialog(this, "Insufficient Funds.\nTransaction Cancelled");
+                }else {
+                    budgetString = String.valueOf(remainingBudget);
+                    budget.setText(budgetString);
+                    int prompt = JOptionPane.showOptionDialog(
+                    null, // Parent component (null for default)
+                    "Total is $"+pricee+".\nDo you want to continue the Transaction?", // Message
+                    "Confirmation", // Title
+                    JOptionPane.YES_NO_OPTION, // Option type
+                    JOptionPane.QUESTION_MESSAGE, // Message type
+                    null, // Icon (null for default)
+                    new String[]{"Yes", "No"}, // Options
+                    "Yes" // Default option
+                );
+                if (prompt == JOptionPane.YES_OPTION) {
+                    
 
-                itemList.setValueAt(UID, itemList.getSelectedRow(),0);
-                itemList.setValueAt(description, itemList.getSelectedRow(), 2);
-                itemList.setValueAt(quantity, itemList.getSelectedRow(), 3);
-                itemList.setValueAt(price, itemList.getSelectedRow(), 4);
-                itemList.setValueAt(totalPrice, itemList.getSelectedRow(), 5);
-                JOptionPane.showMessageDialog(this, "Product successfuly updated");
-                productList.setSelectedIndex(0);
-                descripText.setText("");
-                quantityText.setText("");
-                priceText.setText("");
-                itemList.getSelectionModel().clearSelection();
-            }else {
-                JOptionPane.showMessageDialog(this, "Update Cancelled");
+                    //stock level
+                    String stockLevel = null;
+
+                    if (quantityInt <= 0){
+                        stockLevel = "Empty Stock";
+                    }
+                    else if (quantityInt < 30){
+                        stockLevel = "Low Stock Level";
+                    } else if (quantityInt >= 30 && quantityInt < 90){
+                        stockLevel = "Average Stock Level";
+                    } else if (quantityInt <= 120 && quantityInt >= 90){
+                        stockLevel = "High Stock Level";
+                    }
+
+                    itemList.setValueAt(UID, itemList.getSelectedRow(),0);
+                    itemList.setValueAt(description, itemList.getSelectedRow(), 2);
+                    itemList.setValueAt(quantity, itemList.getSelectedRow(), 3);
+                    itemList.setValueAt(price, itemList.getSelectedRow(), 4);
+                    itemList.setValueAt(totalPrice, itemList.getSelectedRow(), 5);
+                    itemList.setValueAt(stockLevel, itemList.getSelectedRow(), 6);
+                    JOptionPane.showMessageDialog(this, "Product successfully updated");
+                    productList.setSelectedIndex(0);
+                    descripText.setText("");
+                    quantityText.setText("");
+                    priceText.setText("");
+                    itemList.getSelectionModel().clearSelection();
+                }else {
+                    JOptionPane.showMessageDialog(this, "Update Cancelled");
+                }
+                }
+
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Every Product Quantity can't exceed 120 Bottles.");
             }
+            
         }
         else{
             if(itemList.getRowCount()==0){
@@ -489,8 +569,6 @@ public class stockManagement extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         if (itemList.getSelectedRowCount()==1){
-            //deducting budget
-            
             int quantityInt = Integer.parseInt(quantityText.getText());
             int priceInt = Integer.parseInt(priceText.getText());
             int totalPrice = quantityInt * priceInt;
@@ -508,6 +586,7 @@ public class stockManagement extends javax.swing.JFrame {
                 "Yes" // Default option
             );
             if (prompt == JOptionPane.YES_OPTION){
+                //deducting budget
                 String budgetString = budget.getText();
                 int budgetInt = Integer.parseInt(budgetString);
                 int remainingBudget = budgetInt + totalPrice;
@@ -519,7 +598,7 @@ public class stockManagement extends javax.swing.JFrame {
                 quantityText.setText("");
                 priceText.setText("");
                 itemList.getSelectionModel().clearSelection();
-                JOptionPane.showMessageDialog(this, "Product successfuly removed");
+                JOptionPane.showMessageDialog(this, "Product successfully returned.");
             }else {
                 JOptionPane.showMessageDialog(this, "Item Return Cancelled");
             }
@@ -624,7 +703,7 @@ public class stockManagement extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_productListActionPerformed
 
-    private void backupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButton1ActionPerformed
+    private void backupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButtonActionPerformed
         // TODO add your handling code here:
         if (itemList.getRowCount()!= 0)
         {
@@ -637,27 +716,72 @@ public class stockManagement extends javax.swing.JFrame {
 
                 for(int i = 0; i < itemList.getRowCount(); i++){
                     for (int j = 0; j < itemList.getColumnCount(); j++){
-                        bw.write(itemList.getValueAt(i,j).toString()+"_");
+                        bw.write(itemList.getValueAt(i,j)+"_");
                     }
                     bw.newLine();
                 }
                 bw.close();
                 fw.close();
-
             } catch (IOException ex){
                 java.util.logging.Logger.getLogger(stockManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
+            canImport = true;
             JOptionPane.showMessageDialog(this, "Backup has been Created");
         }
         else{
             JOptionPane.showMessageDialog(this, "There is no data to be saved");
         }
-        
-    }//GEN-LAST:event_backupButton1ActionPerformed
+    }//GEN-LAST:event_backupButtonActionPerformed
 
     private void importData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importData1ActionPerformed
-        // TODO add your handling code here:
+        if (canImport == true)
+        {
+            String filepath = "data.txt";
+            File file = new File(filepath);
+            
+            if (!file.exists()){
+                JOptionPane.showMessageDialog(this, "Backup Data Does Not Exist.");
+            } else{
+            try{
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+
+                DefaultTableModel model = (DefaultTableModel)itemList.getModel();
+                Object[] lines = br.lines().toArray();
+
+                for (int i = 0; i < lines.length; i++){
+                    String[] row = lines[i].toString().split("_");
+                    model.addRow(row);
+                }
+                canImport = false;
+                JOptionPane.showMessageDialog(this, "Backup Data Successfully Imported");
+            } catch (IOException ex){
+                java.util.logging.Logger.getLogger(stockManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Backup Data has already been Imported");
+        }
+        
     }//GEN-LAST:event_importData1ActionPerformed
+
+    private void clearTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTableActionPerformed
+        int prompt = JOptionPane.showOptionDialog(
+                null, // Parent component (null for default)
+                "Are you sure you want to clear all table data?", // Message
+                "Confirmation", // Title
+                JOptionPane.YES_NO_OPTION, // Option type
+                JOptionPane.QUESTION_MESSAGE, // Message type
+                null, // Icon (null for default)
+                new String[]{"Yes", "No"}, // Options
+                "Yes" // Default option
+                );
+        if (prompt == JOptionPane.YES_OPTION){
+            model.setRowCount(0);
+        } else{
+            JOptionPane.showMessageDialog(this, "Action Cancelled");
+        }
+    }//GEN-LAST:event_clearTableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -707,9 +831,10 @@ public class stockManagement extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
-    private javax.swing.JButton backupButton1;
+    private javax.swing.JButton backupButton;
     private javax.swing.JLabel budget;
     private javax.swing.JLabel budgetLabel;
+    private javax.swing.JButton clearTable;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel descripLabel;
     private javax.swing.JTextField descripText;
