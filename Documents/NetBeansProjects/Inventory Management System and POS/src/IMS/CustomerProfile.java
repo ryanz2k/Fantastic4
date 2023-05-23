@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Raidi
+ * NOTE: EDIT THIS SHIT
  */
 public class CustomerProfile extends javax.swing.JFrame {
 
