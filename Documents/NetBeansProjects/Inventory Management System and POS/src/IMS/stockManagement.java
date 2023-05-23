@@ -4,9 +4,15 @@
  */
 package IMS;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.*;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.*;
 
 /**
  *
@@ -39,8 +45,9 @@ public class stockManagement extends javax.swing.JFrame {
         stock = new javax.swing.JButton();
         logout = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        editPanel = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
@@ -56,10 +63,10 @@ public class stockManagement extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         itemList = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        importData = new javax.swing.JButton();
         backupButton1 = new javax.swing.JButton();
         budget = new javax.swing.JLabel();
         budgetLabel = new javax.swing.JLabel();
+        importData1 = new javax.swing.JButton();
 
         editItem.setText("STOCKS");
         editItem.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +88,17 @@ public class stockManagement extends javax.swing.JFrame {
 
         jButton2.setText("ADD ITEM");
 
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stock Management");
 
@@ -88,7 +106,7 @@ public class stockManagement extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        editPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         backButton.setBackground(new java.awt.Color(102, 102, 102));
         backButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -159,30 +177,30 @@ public class stockManagement extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout editPanelLayout = new javax.swing.GroupLayout(editPanel);
+        editPanel.setLayout(editPanelLayout);
+        editPanelLayout.setHorizontalGroup(
+            editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(editPanelLayout.createSequentialGroup()
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(quantityLabel)
                             .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(productList, 0, 236, Short.MAX_VALUE)
                             .addComponent(quantityText))
                         .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(descripLabel)
                             .addComponent(priceLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(descripText)
                             .addComponent(priceText)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(editPanelLayout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,35 +210,35 @@ public class stockManagement extends javax.swing.JFrame {
                         .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        editPanelLayout.setVerticalGroup(
+            editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateButton))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(descripLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(productList)
                         .addComponent(descripText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(priceLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(quantityText)
                             .addComponent(quantityLabel))))
                 .addGap(65, 65, 65))
         );
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(40, 290, 720, 160);
+        jPanel1.add(editPanel);
+        editPanel.setBounds(40, 290, 720, 160);
 
         itemList.setAutoCreateRowSorter(true);
         itemList.setModel(new javax.swing.table.DefaultTableModel(
@@ -228,11 +246,11 @@ public class stockManagement extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID#", "Product", "Description", "Quantity (Bottles)", "Price ( $ )", "Total Price ($)"
+                "ID#", "Product", "Description", "Quantity (Bottles)", "Price ( $ )", "Total Price ($)", "Stock Level"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -252,6 +270,7 @@ public class stockManagement extends javax.swing.JFrame {
             itemList.getColumnModel().getColumn(3).setResizable(false);
             itemList.getColumnModel().getColumn(4).setResizable(false);
             itemList.getColumnModel().getColumn(5).setResizable(false);
+            itemList.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jPanel1.add(jScrollPane1);
@@ -261,16 +280,6 @@ public class stockManagement extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(380, 140, 75, 23);
 
-        importData.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        importData.setText("IMPORT DATA");
-        importData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importDataActionPerformed(evt);
-            }
-        });
-        jPanel1.add(importData);
-        importData.setBounds(540, 460, 220, 39);
-
         backupButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         backupButton1.setText("BACKUP");
         backupButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -279,19 +288,29 @@ public class stockManagement extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backupButton1);
-        backupButton1.setBounds(40, 460, 125, 39);
+        backupButton1.setBounds(40, 480, 125, 39);
 
         budget.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         budget.setForeground(new java.awt.Color(255, 255, 255));
         budget.setText("10000");
         jPanel1.add(budget);
-        budget.setBounds(370, 460, 150, 70);
+        budget.setBounds(360, 460, 150, 70);
 
         budgetLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         budgetLabel.setForeground(new java.awt.Color(255, 255, 255));
         budgetLabel.setText("BUDGET: $");
         jPanel1.add(budgetLabel);
-        budgetLabel.setBounds(190, 460, 190, 70);
+        budgetLabel.setBounds(180, 460, 190, 70);
+
+        importData1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        importData1.setText("IMPORT DATA");
+        importData1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importData1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(importData1);
+        importData1.setBounds(540, 480, 220, 39);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -605,34 +624,6 @@ public class stockManagement extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_productListActionPerformed
 
-    private void importDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importDataActionPerformed
-        // TODO add your handling code here:
-        String filepath = "data.txt";
-        File file = new File(filepath);
-        
-        if (!file.exists()){
-            JOptionPane.showMessageDialog(this, "There are no Backup Data");
-        } else{
-            try{
-                FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-                model.setRowCount(0);
-                model = (DefaultTableModel)itemList.getModel();
-                Object[] lines = br.lines().toArray();
-
-                for(int i = 0; i < lines.length; i++){
-                    String[] row = lines[i].toString().split("_");
-                    model.addRow(row);
-            }
-            } catch (IOException ex){
-                java.util.logging.Logger.getLogger(stockManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-            JOptionPane.showMessageDialog(this, "Data Successfully Imported");
-        }
-        
-        
-    }//GEN-LAST:event_importDataActionPerformed
-
     private void backupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButton1ActionPerformed
         // TODO add your handling code here:
         if (itemList.getRowCount()!= 0)
@@ -663,6 +654,10 @@ public class stockManagement extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_backupButton1ActionPerformed
+
+    private void importData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importData1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importData1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -719,12 +714,13 @@ public class stockManagement extends javax.swing.JFrame {
     private javax.swing.JLabel descripLabel;
     private javax.swing.JTextField descripText;
     private javax.swing.JButton editItem;
-    private javax.swing.JButton importData;
+    private javax.swing.JPanel editPanel;
+    private javax.swing.JButton importData1;
     private javax.swing.JTable itemList;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logout;
     private javax.swing.JLabel nameLabel;
