@@ -189,7 +189,7 @@ public class CustomerRegister extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(customerfullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,7 +227,7 @@ public class CustomerRegister extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotologin)
                     .addComponent(confirmregister))
-                .addGap(66, 66, 66))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,17 +252,17 @@ public class CustomerRegister extends javax.swing.JFrame {
         }
         else{
             try {
-                BufferedWriter customerdetials = new BufferedWriter(new FileWriter("C:\\Users\\Raidi\\Documents\\ComProgIMSProject\\trunk\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\IMS\\"+usernamereg+".txt"));
+                BufferedWriter customerdetials = new BufferedWriter(new FileWriter("C:\\Users\\Raidi\\Documents\\ComProgIMSProject\\trunk\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\IMS\\"+fullnamereg+".txt"));
                 customerdetials.write(fullnamereg);
-                customerdetials.write("\n"+usernamereg);
-                customerdetials.write("\n"+passwordreg);
-                customerdetials.write("\n"+emailreg);
+                customerdetials.write("\nUsername: "+usernamereg);
+                customerdetials.write("\nPassword: "+passwordreg);
+                customerdetials.write("\nEmail: "+emailreg);
                 customerdetials.write("\n"+bddayreg);
-                customerdetials.write("\n"+bdmonthreg);
-                customerdetials.write("\n"+bddayyearreg);
-                customerdetials.write("\n"+creditnumreg);
-                customerdetials.write("\n"+creditpinreg);
-                customerdetials.write("\n"+creditmoneyreg);
+                customerdetials.write("/"+bdmonthreg);
+                customerdetials.write("/"+bddayyearreg);
+                customerdetials.write("\nCredit Card No#: "+creditnumreg);
+                customerdetials.write("\nCredit Card Pin: "+creditpinreg);
+                customerdetials.write("\nCredit on Account: "+creditmoneyreg);
                 
                 customerdetials.close();
             } catch (IOException e) {
