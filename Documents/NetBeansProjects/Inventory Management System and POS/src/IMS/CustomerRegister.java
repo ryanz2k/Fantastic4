@@ -253,11 +253,11 @@ public class CustomerRegister extends javax.swing.JFrame {
         else{
             try {
                 BufferedWriter customerdetials = new BufferedWriter(new FileWriter("C:\\Users\\Raidi\\Documents\\ComProgIMSProject\\trunk\\Documents\\NetBeansProjects\\Inventory Management System and POS\\src\\IMS\\"+fullnamereg+".txt"));
-                customerdetials.write(fullnamereg);
+                customerdetials.write("\nFullname: "+fullnamereg);
                 customerdetials.write("\nUsername: "+usernamereg);
                 customerdetials.write("\nPassword: "+passwordreg);
                 customerdetials.write("\nEmail: "+emailreg);
-                customerdetials.write("\n"+bddayreg);
+                customerdetials.write("\n(day/month/year)Birthday: "+bddayreg);
                 customerdetials.write("/"+bdmonthreg);
                 customerdetials.write("/"+bddayyearreg);
                 customerdetials.write("\nCredit Card No#: "+creditnumreg);
